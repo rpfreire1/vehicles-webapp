@@ -34,6 +34,12 @@ dependencies {
   // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
   implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.4'
   // https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0
+  // https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client
+  implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.29.1'
+// https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-jaxb
+  implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-jaxb', version: '2.29.1'
+  // https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2
+  implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.29.1'
 
 
 

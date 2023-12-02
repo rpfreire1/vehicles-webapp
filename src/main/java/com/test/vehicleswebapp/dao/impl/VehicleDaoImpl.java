@@ -10,6 +10,7 @@ public class VehicleDaoImpl implements VehicleDao {
     EntityManager em;
     @Override
     public List<Vehicle> findAllVehicles() {
+
         return em.createNamedQuery("Vehicle.findAll").getResultList();
     }
 
