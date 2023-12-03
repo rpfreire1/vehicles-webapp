@@ -8,7 +8,8 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.List;
 
-public class VehicleDaoImpl implements VehicleDao {
+public class
+VehicleDaoImpl implements VehicleDao {
     @PersistenceContext(unitName = "VehiclePU")
     EntityManager em;
 

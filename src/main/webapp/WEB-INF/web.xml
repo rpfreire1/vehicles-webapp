@@ -9,7 +9,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/listVehicles.xhtml</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>JerseyWebApplication</servlet-name>

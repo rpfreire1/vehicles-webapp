@@ -97,31 +97,6 @@
 
     </h:form>
 
-    <p:dialog id="personaDlg" widgetVar="personaDialog" header="Agregar Persona" modal="true" showEffect="fade" hideEffect="fade"
-              resizable="false" >
-        <h:form id="dialogForm">
-            <p:outputPanel id="personaDetail" style="text-align: center">
-                <p:panelGrid id="display" columns="4" columnClasses="label, value" >
-                    <h:outputText value="Nombre" />
-                    <h:inputText value="#{personaBean.personaSeleccionada.nombre}" />
-
-                    <h:outputText value="Apellido" />
-                    <h:inputText value="#{personaBean.personaSeleccionada.apellido}" />
-
-                    <h:outputText value="Email" />
-                    <h:inputText value="#{personaBean.personaSeleccionada.email}" />
-
-                    <h:outputText value="Telefono" />
-                    <h:inputText value="#{personaBean.personaSeleccionada.telefono}" />
-
-                    <f:facet name="footer" >
-                        <p:commandButton value="Agregar" actionListener="#{personaBean.agregarPersona}"
-                                         update="display,:vehiclesListForm:personasDataTable" oncomplete="PF('personaDialog').hide();" />
-                    </f:facet>
-                </p:panelGrid>
-            </p:outputPanel>
-        </h:form>
-    </p:dialog>
 
 </h:body>
 </html>
