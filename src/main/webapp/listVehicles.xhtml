@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Listado de Vehiculos</title>
@@ -11,91 +10,118 @@
 <h:body>
     <p:ajaxStatus style="width: 16px;height: 16px;" id="ajaxStatusPanel">
         <f:facet name="start">
-            <h:graphicImage library="images" name="ajaxloading.gif" />
+            <h:graphicImage library="images" name="ajaxloading.gif"/>
         </f:facet>
 
         <f:facet name="complete">
-            <h:outputText value="" />
+            <h:outputText value=""/>
         </f:facet>
 
     </p:ajaxStatus>
 
     <h:form id="vehiclesListForm">
-        <p:growl id="messages" showDetail="true" />
+        <p:growl id="messages" showDetail="true"/>
         <p:messages/>
-
         <p:dataTable id="vehiclesDataTable"
-                     value="#{vehicleBean.vehicles}" var="vehicle" editable="true" rowKey="#{vehicles.vehicleCode}"
-                     selection="#{vehicleBean.vehicleSelected}"
-                     selectionMode="single" >
-
+                     value="#{vehicleBean.vehicles}"
+                     var="vehicle" editable="true" rowKey="#{vehicle.vehicleCode}"
+                     selection="#{vehicleBean.vehicleSelected}" selectionMode="single">
             <f:facet name="header">
-                Listado de Vehiculos
+                Listado de Vehículos Registrados
             </f:facet>
-
             <p:column headerText="Id">
-                <h:outputText value="#{vehicle.vehicleCode}" />
+                <h:outputText value="#{vehicle.vehicleCode}"/>
             </p:column>
-            <p:column headerText="Placas">
+            <p:column headerText="Placa">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{vehicle.vehiclePlates}" />
+                        <h:outputText value="#{vehicle.vehiclePlates}"/>
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{vehicle.vehiclePlates}" />
+                        <p:inputText value="#{vehicle.vehiclePlates}"/>
                     </f:facet>
                 </p:cellEditor>
             </p:column>
-            <p:column headerText="Modelo">
+            <p:column headerText="Observaciones">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{vehicle.model.modelBrand}" />
+                        <h:outputText value="#{vehicle.vehicleComment}"/>
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputText value="#{vehicle.model.modelBrand}" />
+                        <p:inputText value="#{vehicle.vehicleComment}"/>
                     </f:facet>
                 </p:cellEditor>
             </p:column>
-            <p:column headerText="OBSERVACIONES">
+            <p:column headerText="Fecha de Compra">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{vehicle.vehicleComment}" />
+                        <h:outputText value="#{vehicle.vehiclePurchasedDate}">
+                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                        </h:outputText>
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputTextarea value="#{vehicle.vehicleComment}" />
+                        <p:calendar value="#{vehicle.vehiclePurchasedDate}" pattern="yyyy-MM-dd"/>
                     </f:facet>
                 </p:cellEditor>
             </p:column>
-            <p:column headerText="PRECIO">
+            <p:column headerText="Fecha de Mantenimiento">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{vehicle.vehiclePrice}" />
+                        <h:outputText value="#{vehicle.vehicleLastMaintenance}">
+                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                        </h:outputText>
                     </f:facet>
                     <f:facet name="input">
-                        <p:inputNumber value="#{vehicle.vehiclePrice}" />
+                        <p:calendar value="#{vehicle.vehicleLastMaintenance}" pattern="yyyy-MM-dd"/>
                     </f:facet>
                 </p:cellEditor>
             </p:column>
-
+            <p:column headerText="Precio">
+                <p:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText value="#{vehicle.vehiclePrice}">
+                            <f:convertNumber pattern="#,##0.00"/>
+                        </h:outputText>
+                    </f:facet>
+                    <f:facet name="input">
+                        <p:inputNumber value="#{vehicle.vehiclePrice}" decimalPlaces="2"/>
+                    </f:facet>
+                </p:cellEditor>
+            </p:column>
             <f:facet name="footer">
-                <p:commandButton value="Regresar" action="index" />
+                <p:commandButton value="Regresar" action="index"/>
                 <p:spacer height="5px"/>
-                <p:commandButton value="Agregar"
-                            actionListener="#{vehicleBean.resetVehicleSelected}"
-                       update=":dialogForm" oncomplete="PF('vehicleDialog').show()" />
+                <p:commandButton value="Agregar" actionListener="#{vehicleBean.resetVehicleSelected()}"
+                                 update=":dialogForm" oncomplete="PF('vehicleDialog').show()"/>
             </f:facet>
-
-            <p:column headerText="Opciones" style="width: 50px">
-                <p:rowEditor/>
-            </p:column>
-
-            <p:ajax event="rowEdit" listener="#{vehicleBean.editListener}"/>
-
         </p:dataTable>
-
-
-
     </h:form>
+    <p:dialog id="vehicleDlg" widgetVar="vehicleDialog" header="Agregar Vehiculo" modal="true" showEffect="fade"
+              hideEffect="fade" resizable="false">
+        <h:form id="dialogForm">
+            <p:outputPanel id="vehicleDetail" style="text-align: center">
+                <p:panelGrid id="display" columns="4" columnClasses="label, value">
+                    <h:outputLabel for="placa" value="Placa"/>
+                    <p:inputText id="placa" value="#{vehicleBean.vehicleSelected.vehiclePlates}" required="true"/>
+                    <p:message for="placa"/>
+                    <h:outputLabel for="observaciones" value="Observaciones"/>
+                    <p:inputTextarea id="observaciones" value="#{vehicleBean.vehicleSelected.vehicleComment}" rows="5"
+                                     cols="30"/>
+                    <p:message for="observaciones"/>
+                    <h:outputLabel for="fechaCompra" value="Fecha de Compra"/>
+                    <p:calendar id="fechaCompra" value="#{vehicleBean.vehicleSelected.vehiclePurchasedDate}"
+                                pattern="yyyy-MM-dd"/>
+                    <p:message for="fechaCompra"/>
+                    <f:facet name="footer">
+                        <p:commandButton value="Agregar"
+                                         actionListener="#{vehicleBean.registerVehicle()}"
+                                         update="display,:vehiclesListForm:vehiclesDataTable"
+                                         oncomplete="PF('vehicleDialog').hide();"/>
+                    </f:facet>
+                </p:panelGrid>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
 
 
 </h:body>
