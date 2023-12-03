@@ -41,7 +41,7 @@ dependencies {
   // https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2
   implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.29.1'
 
-  implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core','2.41'
+  implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core',version:'2.41'
 
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
