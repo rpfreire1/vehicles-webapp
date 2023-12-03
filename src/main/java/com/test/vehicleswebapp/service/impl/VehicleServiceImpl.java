@@ -1,5 +1,6 @@
 package com.test.vehicleswebapp.service.impl;
 
+import com.test.vehicleswebapp.common.util.HolidayDaysUtil;
 import com.test.vehicleswebapp.dao.ModelDao;
 import com.test.vehicleswebapp.dao.VehicleDao;
 import com.test.vehicleswebapp.model.Model;
@@ -8,8 +9,12 @@ import com.test.vehicleswebapp.rest.dto.PriceResDto;
 import com.test.vehicleswebapp.rest.service.PriceRestConsumeService;
 import com.test.vehicleswebapp.service.VehicleService;
 
+import java.time.DayOfWeek;
+import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.Local;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -28,6 +33,25 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> listVehicles() {
         return vehicleDao.findAllVehicles();
+    }
+
+    @Override
+    public List<Vehicle> findVehiclesMaintenanceDateSchedule(LocalDate filteredDate) {
+        LocalDate dateTempMaintenance=filteredDate.plusDays(60);
+        List<LocalDate>holidays= HolidayDaysUtil.getHolidays();
+        while (holidays.contains(dateTempMaintenance)){
+            if(holidays.contains(dateTempMaintenance)){
+                dateTempMaintenance=dateTempMaintenance.plusDays(1);
+            }
+        }
+        DayOfWeek dayOfWeek=dateTempMaintenance.getDayOfWeek();
+        if(dayOfWeek==DayOfWeek.SATURDAY){
+            dateTempMaintenance=dateTempMaintenance.plusDays(2);
+        } else if (dayOfWeek==DayOfWeek.SUNDAY) {
+            dateTempMaintenance=dateTempMaintenance.plusDays(1);
+        }
+
+        return null;
     }
 
     @Override

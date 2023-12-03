@@ -3,7 +3,7 @@ package com.test.vehicleswebapp.controller;
 import com.test.vehicleswebapp.model.Vehicle;
 import com.test.vehicleswebapp.service.VehicleService;
 
-import java.util.Date;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -23,13 +23,15 @@ public class VehicleController {
     public List<Vehicle> getAllVehicles(){
         return vehicleService.listVehicles();
     }
-    /*
+/*
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Vehicle> getVehiclesMaintenancceDateSchedule(Date dateToSearch){
-        return vehicleService.
+
     }
-*/
+
+ */
+
     @POST
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

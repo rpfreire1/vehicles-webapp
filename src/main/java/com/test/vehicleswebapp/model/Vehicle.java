@@ -1,7 +1,7 @@
 package com.test.vehicleswebapp.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -25,10 +25,10 @@ public class Vehicle implements Serializable{
     private String vehicleComment;
 
     @Column(name = "vehicle_purchasedDate")
-    private Date vehiclePurchasedDate;
+    private LocalDate vehiclePurchasedDate;
 
     @Column(name = "vehicle_lastMaintenance")
-    private Date vehicleLastMaintenance;
+    private LocalDate vehicleLastMaintenance;
 
     @Column(name = "vehicle_price")
     private Double vehiclePrice;
@@ -39,7 +39,7 @@ public class Vehicle implements Serializable{
 
     // Constructor, getters, and setters
 
-    public Vehicle(String vehiclePlates, String vehicleComment, Date vehiclePurchasedDate, Date vehicleLastMaintenance, Double vehiclePrice, Model model) {
+    public Vehicle(String vehiclePlates, String vehicleComment, LocalDate vehiclePurchasedDate, LocalDate vehicleLastMaintenance, Double vehiclePrice, Model model) {
         this.vehiclePlates = vehiclePlates;
         this.vehicleComment = vehicleComment;
         this.vehiclePurchasedDate = vehiclePurchasedDate;
@@ -75,19 +75,19 @@ public class Vehicle implements Serializable{
         this.vehicleComment = vehicleComment;
     }
 
-    public Date getVehiclePurchasedDate() {
+    public LocalDate getVehiclePurchasedDate() {
         return vehiclePurchasedDate;
     }
 
-    public void setVehiclePurchasedDate(Date vehiclePurchasedDate) {
+    public void setVehiclePurchasedDate(LocalDate vehiclePurchasedDate) {
         this.vehiclePurchasedDate = vehiclePurchasedDate;
     }
 
-    public Date getVehicleLastMaintenance() {
+    public LocalDate getVehicleLastMaintenance() {
         return vehicleLastMaintenance;
     }
 
-    public void setVehicleLastMaintenance(Date vehicleLastMaintenance) {
+    public void setVehicleLastMaintenance(LocalDate vehicleLastMaintenance) {
         this.vehicleLastMaintenance = vehicleLastMaintenance;
     }
 
