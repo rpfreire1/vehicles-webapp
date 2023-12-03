@@ -4,7 +4,9 @@ import com.test.vehicleswebapp.model.Vehicle;
 import com.test.vehicleswebapp.service.VehicleService;
 
 
+import java.time.LocalDate;
 import java.util.List;
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -23,14 +25,21 @@ public class VehicleController {
     public List<Vehicle> getAllVehicles(){
         return vehicleService.listVehicles();
     }
-/*
+
     @GET
+    @Path("{dateToSearch}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Vehicle> getVehiclesMaintenancceDateSchedule(Date dateToSearch){
+    public List<Vehicle> getVehiclesMaintenancceDateSchedule(@PathParam("dateToSearch") String dateToSearch){
+        LocalDate dateSearch=LocalDate.parse(dateToSearch);
+        List<Vehicle> vehicles=vehicleService.findVehiclesMaintenanceDateSchedule(dateSearch);
+        if(vehicles.isEmpty()){
+            return null;
+        }
+        return vehicles;
 
     }
 
- */
+
 
     @POST
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

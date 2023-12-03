@@ -22,7 +22,7 @@ public class VehicleDaoImpl implements VehicleDao {
 
     @Override
     public List<Vehicle> findVehiclesByPurchasedDateOrMaintenanceDate(LocalDate purchasedDate) {
-        return null;
+        return em.createNamedQuery("Vehicle.findByPurchasedDateOrMaintenanceDate").getResultList();
     }
 
 }

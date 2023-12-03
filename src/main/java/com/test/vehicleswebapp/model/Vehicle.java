@@ -8,7 +8,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Vehicle")
 @NamedQueries({
-        @NamedQuery(name = "Vehicle.findAll", query = "SELECT p FROM Vehicle p")
+        @NamedQuery(name = "Vehicle.findAll", query = "SELECT p FROM Vehicle p"),
+        @NamedQuery(name = "Vehicle.findByPurchasedDateOrMaintenanceDate", query = "select p from Vehicle p where p.vehiclePurchasedDate =:filteredDate or p.vehicleLastMaintenance=:filteredDate")
 })
 public class Vehicle implements Serializable{
     private static final long  serialVersionUID=1L;

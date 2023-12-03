@@ -6,7 +6,7 @@ import com.test.vehicleswebapp.model.Vehicle;
 import java.time.LocalDate;
 
 import java.util.List;
-import javax.ejb.Local;
+
 
 public interface VehicleService {
     public List<Vehicle> listVehicles();

@@ -10,6 +10,7 @@ import com.test.vehicleswebapp.rest.service.PriceRestConsumeService;
 import com.test.vehicleswebapp.service.VehicleService;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.time.LocalDate;
 import java.util.List;
@@ -50,8 +51,11 @@ public class VehicleServiceImpl implements VehicleService {
         } else if (dayOfWeek==DayOfWeek.SUNDAY) {
             dateTempMaintenance=dateTempMaintenance.plusDays(1);
         }
-
-        return null;
+        List<Vehicle> vehicleList=vehicleDao.findVehiclesByPurchasedDateOrMaintenanceDate(dateTempMaintenance);
+        if (vehicleList.size()==0 || vehicleList.isEmpty()){
+            return null;
+        }
+        return vehicleList;
     }
 
     @Override
