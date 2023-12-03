@@ -1,7 +1,6 @@
 package com.test.vehicleswebapp.web;
 
 
-
 import com.test.vehicleswebapp.model.Vehicle;
 import com.test.vehicleswebapp.service.VehicleService;
 import org.apache.logging.log4j.LogManager;
@@ -33,25 +32,30 @@ public class VehicleBean {
         this.vehicleSelected = new Vehicle();
     }
 
-    public Vehicle getVehicleSelected(){
+    public Vehicle getVehicleSelected() {
         return vehicleSelected;
     }
-    public void setVehicleSelected(Vehicle vehicleSelected){
-        this.vehicleSelected=vehicleSelected;
+
+    public void setVehicleSelected(Vehicle vehicleSelected) {
+        this.vehicleSelected = vehicleSelected;
     }
-    public List<Vehicle>getVehicles(){
+
+    public List<Vehicle> getVehicles() {
         return vehicles;
     }
-    public void setVehicles(List<Vehicle> vehicles){
-        this.vehicles=vehicles;
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
-    public void registerVehicle(){
+
+    public void registerVehicle() {
         this.vehicleService.registerVehicle(vehicleSelected);
         this.vehicles.add(vehicleSelected);
-        this.vehicleSelected=null;
+        this.vehicleSelected = null;
     }
-    public void resetVehicleSelected(){
-        this.vehicleSelected=new Vehicle();
+
+    public void resetVehicleSelected() {
+        this.vehicleSelected = new Vehicle();
     }
 
 }

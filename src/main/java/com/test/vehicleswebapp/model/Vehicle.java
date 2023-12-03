@@ -1,18 +1,14 @@
 package com.test.vehicleswebapp.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+
 @Entity
 @Table(name = "Vehicle")
-@NamedQueries({
-        @NamedQuery(name = "Vehicle.findAll", query = "SELECT p FROM Vehicle p"),
-        @NamedQuery(name = "Vehicle.findByPurchasedDateOrMaintenanceDate", query = "select p from Vehicle p where p.vehiclePurchasedDate =:filteredDate or p.vehicleLastMaintenance=:filteredDate")
-})
-public class Vehicle implements Serializable{
-    private static final long  serialVersionUID=1L;
+@NamedQueries({@NamedQuery(name = "Vehicle.findAll", query = "SELECT p FROM Vehicle p"), @NamedQuery(name = "Vehicle.findByPurchasedDateOrMaintenanceDate", query = "select p from Vehicle p where p.vehiclePurchasedDate =:filteredDate or p.vehicleLastMaintenance=:filteredDate")})
+public class Vehicle implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,14 +106,6 @@ public class Vehicle implements Serializable{
 
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "vehicleCode=" + vehicleCode +
-                ", vehiclePlates='" + vehiclePlates + '\'' +
-                ", vehicleComment='" + vehicleComment + '\'' +
-                ", vehiclePurchasedDate=" + vehiclePurchasedDate +
-                ", vehicleLastMaintenance=" + vehicleLastMaintenance +
-                ", vehiclePrice=" + vehiclePrice +
-                ", model=" + model +
-                '}';
+        return "Vehicle{" + "vehicleCode=" + vehicleCode + ", vehiclePlates='" + vehiclePlates + '\'' + ", vehicleComment='" + vehicleComment + '\'' + ", vehiclePurchasedDate=" + vehiclePurchasedDate + ", vehicleLastMaintenance=" + vehicleLastMaintenance + ", vehiclePrice=" + vehiclePrice + ", model=" + model + '}';
     }
 }

@@ -9,16 +9,14 @@ import com.test.vehicleswebapp.rest.dto.PriceResDto;
 import com.test.vehicleswebapp.rest.service.PriceRestConsumeService;
 import com.test.vehicleswebapp.service.VehicleService;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.time.LocalDate;
-import java.util.List;
 import javax.annotation.Resource;
-import javax.ejb.Local;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.List;
+
 @Stateless
 public class VehicleServiceImpl implements VehicleService {
     @Inject
@@ -38,21 +36,21 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<Vehicle> findVehiclesMaintenanceDateSchedule(LocalDate filteredDate) {
-        LocalDate dateTempMaintenance=filteredDate.plusDays(60);
-        List<LocalDate>holidays= HolidayDaysUtil.getHolidays();
-        while (holidays.contains(dateTempMaintenance)){
-            if(holidays.contains(dateTempMaintenance)){
-                dateTempMaintenance=dateTempMaintenance.plusDays(1);
+        LocalDate dateTempMaintenance = filteredDate.plusDays(60);
+        List<LocalDate> holidays = HolidayDaysUtil.getHolidays();
+        while (holidays.contains(dateTempMaintenance)) {
+            if (holidays.contains(dateTempMaintenance)) {
+                dateTempMaintenance = dateTempMaintenance.plusDays(1);
             }
         }
-        DayOfWeek dayOfWeek=dateTempMaintenance.getDayOfWeek();
-        if(dayOfWeek==DayOfWeek.SATURDAY){
-            dateTempMaintenance=dateTempMaintenance.plusDays(2);
-        } else if (dayOfWeek==DayOfWeek.SUNDAY) {
-            dateTempMaintenance=dateTempMaintenance.plusDays(1);
+        DayOfWeek dayOfWeek = dateTempMaintenance.getDayOfWeek();
+        if (dayOfWeek == DayOfWeek.SATURDAY) {
+            dateTempMaintenance = dateTempMaintenance.plusDays(2);
+        } else if (dayOfWeek == DayOfWeek.SUNDAY) {
+            dateTempMaintenance = dateTempMaintenance.plusDays(1);
         }
-        List<Vehicle> vehicleList=vehicleDao.findVehiclesByPurchasedDateOrMaintenanceDate(dateTempMaintenance);
-        if (vehicleList.size()==0 || vehicleList.isEmpty()){
+        List<Vehicle> vehicleList = vehicleDao.findVehiclesByPurchasedDateOrMaintenanceDate(dateTempMaintenance);
+        if (vehicleList.size() == 0 || vehicleList.isEmpty()) {
             return null;
         }
         return vehicleList;
@@ -66,8 +64,8 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public void registerVehicle(Vehicle vehicle) {
         try {
-            PriceResDto price=new PriceResDto();
-            price=priceRestConsumeService.getPriceVehicle(vehicle.getVehiclePlates());
+            PriceResDto price = new PriceResDto();
+            price = priceRestConsumeService.getPriceVehicle(vehicle.getVehiclePlates());
             vehicle.setVehiclePrice(price.getPrice());
             vehicleDao.createVehicle(vehicle);
         } catch (Throwable t) {

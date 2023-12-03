@@ -34,10 +34,7 @@ public class PriceResDto {
 
     @Override
     public String toString() {
-        return "PriceResDto{" +
-                "vehiclePlates='" + vehiclePlates + '\'' +
-                ", price=" + price +
-                '}';
+        return "PriceResDto{" + "vehiclePlates='" + vehiclePlates + '\'' + ", price=" + price + '}';
     }
 
 }

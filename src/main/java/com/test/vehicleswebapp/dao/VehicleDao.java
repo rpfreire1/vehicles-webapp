@@ -6,8 +6,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface VehicleDao {
-    public List<Vehicle> findAllVehicles();
-    public void createVehicle(Vehicle vehicle);
+    List<Vehicle> findAllVehicles();
 
-    public List<Vehicle> findVehiclesByPurchasedDateOrMaintenanceDate(LocalDate purchasedDate);
+    void createVehicle(Vehicle vehicle);
+
+    List<Vehicle> findVehiclesByPurchasedDateOrMaintenanceDate(LocalDate purchasedDate);
 }
