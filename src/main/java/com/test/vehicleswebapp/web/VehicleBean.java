@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-@Named("VehicleBean")
+@Named("vehicleBean")
 @RequestScoped
 public class VehicleBean {
     Logger log = LogManager.getRootLogger();
