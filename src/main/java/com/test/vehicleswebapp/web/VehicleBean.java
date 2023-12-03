@@ -1,8 +1,9 @@
 package com.test.vehicleswebapp.web;
 
 
-import com.javatest.vehicleswebapp.model.Vehicle;
-import com.javatest.vehicleswebapp.service.VehicleService;
+
+import com.test.vehicleswebapp.model.Vehicle;
+import com.test.vehicleswebapp.service.VehicleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
