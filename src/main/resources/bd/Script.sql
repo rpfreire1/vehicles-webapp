@@ -16,6 +16,7 @@ CREATE DATABASE "vehicles-jee"
 
 -- DROP DATABASE IF EXISTS "vehicles-jee";
 
+CREATE SCHEMA vehicles;
 
 CREATE TABLE Vehicle (
                          vehicle_code SERIAL PRIMARY KEY,

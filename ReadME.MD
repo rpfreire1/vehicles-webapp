@@ -70,8 +70,6 @@ Agregar el .jar JDBC de Postgres, se puede descargar desde https://mvnrepository
 
 2. Implementación de la base de datos.
    Ejecutar el Script.sql ubicado en resources/bd
-
-3.  <h2>Observaciones</h2>
-- Vistas con PrimeFaces de listar se encuentra implementada.
-- La vista del formulario para editar se encuentra instanciado el componente pero no se implementó por falta de tiempo.
-- No se terminó de implementar el método de Fechas de mantenimiento
+    
+3. Consumo del servicio Rest.
+    DIRECCION_DEL_SERVIDOR:PUERTO/api/v1/vehicles/<strong>(fecha a buscar en formato AAAA-MM-DD)</strong>
