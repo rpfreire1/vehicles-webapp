@@ -25,7 +25,7 @@ public class Model implements Serializable {
     @Column(name = "model_brand")
     private String modelBrand;
 
-    @Column(name = "model_manufacturer")
+    @Column(name = "model_manufacter")
     private String modelManufacturer;
 
     // Constructor, getters, and setters

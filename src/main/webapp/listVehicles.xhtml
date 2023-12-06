@@ -52,11 +52,12 @@
                     </f:facet>
                 </p:cellEditor>
             </p:column>
+
             <p:column headerText="Fecha de Compra">
                 <p:cellEditor>
                     <f:facet name="output">
-                        <h:outputText value="#{vehicle.vehiclePurchasedDate}">
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                        <h:outputText value="#{vehicle.vehiclePurchasedDate}" >
+                            <f:convertDateTime type="localDate" dateStyle="long" locale="es"/>
                         </h:outputText>
                     </f:facet>
                     <f:facet name="input">
@@ -64,6 +65,7 @@
                     </f:facet>
                 </p:cellEditor>
             </p:column>
+            <!--
             <p:column headerText="Fecha de Mantenimiento">
                 <p:cellEditor>
                     <f:facet name="output">
@@ -76,6 +78,7 @@
                     </f:facet>
                 </p:cellEditor>
             </p:column>
+            -->
             <p:column headerText="Precio">
                 <p:cellEditor>
                     <f:facet name="output">
