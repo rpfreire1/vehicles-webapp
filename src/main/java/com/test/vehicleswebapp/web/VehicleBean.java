@@ -1,6 +1,7 @@
 package com.test.vehicleswebapp.web;
 
 
+import com.test.vehicleswebapp.model.Model;
 import com.test.vehicleswebapp.model.Vehicle;
 import com.test.vehicleswebapp.service.VehicleService;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +18,7 @@ import java.util.List;
 public class VehicleBean {
     Logger log = LogManager.getRootLogger();
     List<Vehicle> vehicles;
+    List<Model> models;
     @Inject
     private VehicleService vehicleService;
     private Vehicle vehicleSelected;
@@ -28,6 +30,7 @@ public class VehicleBean {
     @PostConstruct
     public void instantiate() {
         this.vehicles = vehicleService.listVehicles();
+        this.models=vehicleService.listAllVehiclesModels();
         log.debug("ManagedBean Objects retrieved" + this.vehicles);
         this.vehicleSelected = new Vehicle();
     }
@@ -43,6 +46,8 @@ public class VehicleBean {
     public List<Vehicle> getVehicles() {
         return vehicles;
     }
+    public List<Model> getModels(){return  models;}
+
 
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;

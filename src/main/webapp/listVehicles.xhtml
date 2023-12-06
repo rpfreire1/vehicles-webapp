@@ -26,7 +26,7 @@
                      value="#{vehicleBean.vehicles}"
                      var="vehicle" editable="true" rowKey="#{vehicle.vehicleCode}"
                      selection="#{vehicleBean.vehicleSelected}" selectionMode="single">
-            <f:facet name="header">
+            <f:facet name="header" style="text-align: center">
                 Listado de Vehículos Registrados
             </f:facet>
             <p:column headerText="Id">
@@ -102,11 +102,16 @@
     <p:dialog id="vehicleDlg" widgetVar="vehicleDialog" header="Agregar Vehiculo" modal="true" showEffect="fade"
               hideEffect="fade" resizable="false">
         <h:form id="dialogForm">
-            <p:outputPanel id="vehicleDetail" style="text-align: center">
-                <p:panelGrid id="display" columns="4" columnClasses="label, value">
+            <p:outputPanel id="vehicleDetail" >
+                <p:panelGrid id="display" columns="1" styleClass="ui-panelgrid-blank">
                     <h:outputLabel for="placa" value="Placa"/>
                     <p:inputText id="placa" value="#{vehicleBean.vehicleSelected.vehiclePlates}" required="true"/>
                     <p:message for="placa"/>
+                        <p:outputLabel for="option" value="Modelo del Vehiculo"/>
+                        <p:selectOneMenu id="option" value="#{vehicleBean.vehicleSelected.model}">
+                            <f:selectItems itemLabel="#{model.modelManufacturer} #{model.modelBrand} #{model.modelYear}" value="#{vehicleBean.models}" var="model"/>
+                        </p:selectOneMenu>
+
                     <h:outputLabel for="observaciones" value="Observaciones"/>
                     <p:inputTextarea id="observaciones" value="#{vehicleBean.vehicleSelected.vehicleComment}" rows="5"
                                      cols="30"/>
@@ -115,6 +120,7 @@
                     <p:calendar id="fechaCompra" value="#{vehicleBean.vehicleSelected.vehiclePurchasedDate}"
                                 pattern="yyyy-MM-dd"/>
                     <p:message for="fechaCompra"/>
+
                     <f:facet name="footer">
                         <p:commandButton value="Agregar"
                                          actionListener="#{vehicleBean.registerVehicle()}"

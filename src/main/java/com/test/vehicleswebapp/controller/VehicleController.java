@@ -30,6 +30,7 @@ public class VehicleController {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Vehicle> getVehiclesMaintenancceDateSchedule(@PathParam("dateToSearch") String dateToSearch) {
         LocalDate dateSearch = LocalDate.parse(dateToSearch);
+        System.out.println("entro");
         List<Vehicle> vehicles = vehicleService.findVehiclesMaintenanceDateSchedule(dateSearch);
         if (vehicles.isEmpty()) {
             return null;

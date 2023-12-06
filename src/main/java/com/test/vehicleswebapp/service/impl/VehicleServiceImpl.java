@@ -36,20 +36,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<Vehicle> findVehiclesMaintenanceDateSchedule(LocalDate filteredDate) {
-        LocalDate dateTempMaintenance = filteredDate.plusDays(60);
-        List<LocalDate> holidays = HolidayDaysUtil.getHolidays();
-        while (holidays.contains(dateTempMaintenance)) {
-            if (holidays.contains(dateTempMaintenance)) {
-                dateTempMaintenance = dateTempMaintenance.plusDays(1);
-            }
-        }
-        DayOfWeek dayOfWeek = dateTempMaintenance.getDayOfWeek();
-        if (dayOfWeek == DayOfWeek.SATURDAY) {
-            dateTempMaintenance = dateTempMaintenance.plusDays(2);
-        } else if (dayOfWeek == DayOfWeek.SUNDAY) {
-            dateTempMaintenance = dateTempMaintenance.plusDays(1);
-        }
-        List<Vehicle> vehicleList = vehicleDao.findVehiclesByPurchasedDateOrMaintenanceDate(dateTempMaintenance);
+
+        List<Vehicle> vehicleList = vehicleDao.findVehiclesByPurchasedDateOrMaintenanceDate(filteredDate);
         if (vehicleList.size() == 0 || vehicleList.isEmpty()) {
             return null;
         }
@@ -67,7 +55,24 @@ public class VehicleServiceImpl implements VehicleService {
             PriceResDto price = new PriceResDto();
             price = priceRestConsumeService.getPriceVehicle(vehicle.getVehiclePlates());
             vehicle.setVehiclePrice(price.getPrice());
+
+            LocalDate dateTempMaintenance = vehicle.getVehiclePurchasedDate().plusDays(60);
+            List<LocalDate> holidays = HolidayDaysUtil.getHolidays();
+            while (holidays.contains(dateTempMaintenance)) {
+                if (holidays.contains(dateTempMaintenance)) {
+                    dateTempMaintenance = dateTempMaintenance.plusDays(1);
+                }
+            }
+            DayOfWeek dayOfWeek = dateTempMaintenance.getDayOfWeek();
+            if (dayOfWeek == DayOfWeek.SATURDAY) {
+                dateTempMaintenance = dateTempMaintenance.plusDays(2);
+            } else if (dayOfWeek == DayOfWeek.SUNDAY) {
+                dateTempMaintenance = dateTempMaintenance.plusDays(1);
+            }
+            vehicle.setVehicleLastMaintenance(dateTempMaintenance);
+
             vehicleDao.createVehicle(vehicle);
+
         } catch (Throwable t) {
             context.setRollbackOnly();
             t.printStackTrace(System.out);
