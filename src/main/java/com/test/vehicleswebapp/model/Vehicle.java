@@ -1,12 +1,19 @@
 package com.test.vehicleswebapp.model;
 
+
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Vehicle")
 @NamedQueries({@NamedQuery(name = "Vehicle.findAll", query = "SELECT p FROM Vehicle p"), @NamedQuery(name = "Vehicle.findByPurchasedDateOrMaintenanceDate", query = "select p from Vehicle p where p.vehiclePurchasedDate =:filteredDate or p.vehicleLastMaintenance=:filteredDate")})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Vehicle implements Serializable {
     private static final long serialVersionUID = 1L;
 
