@@ -100,35 +100,33 @@
         </p:dataTable>
     </h:form>
     <p:dialog id="vehicleDlg" widgetVar="vehicleDialog" header="Agregar Vehiculo" modal="true" showEffect="fade"
-              hideEffect="fade" resizable="false">
+              hideEffect="fade" resizable="true" style="text-align: center">
         <h:form id="dialogForm">
             <p:outputPanel id="vehicleDetail" >
-                <p:panelGrid id="display" columns="1" styleClass="ui-panelgrid-blank">
-                    <h:outputLabel for="placa" value="Placa"/>
-                    <p:inputText id="placa" value="#{vehicleBean.vehicleSelected.vehiclePlates}" required="true"/>
-                    <p:message for="placa"/>
+                <p:panelGrid id="display" columns="2"  styleClass="ui-panelgrid-blank" columnClasses="label, value">
+                                <h:outputLabel for="placa" value="Placa"/>
+                                <p:inputText id="placa" value="#{vehicleBean.vehicleSelected.vehiclePlates}" required="true"/>
                         <p:outputLabel for="option" value="Modelo del Vehiculo"/>
                         <p:selectOneMenu id="option" value="#{vehicleBean.vehicleSelected.model}">
                             <f:selectItems itemLabel="#{model.modelManufacturer} #{model.modelBrand} #{model.modelYear}" value="#{vehicleBean.models}" var="model"/>
                         </p:selectOneMenu>
-
-                    <h:outputLabel for="observaciones" value="Observaciones"/>
-                    <p:inputTextarea id="observaciones" value="#{vehicleBean.vehicleSelected.vehicleComment}" rows="5"
-                                     cols="30"/>
-                    <p:message for="observaciones"/>
-                    <h:outputLabel for="fechaCompra" value="Fecha de Compra"/>
-                    <p:calendar id="fechaCompra" value="#{vehicleBean.vehicleSelected.vehiclePurchasedDate}"
-                                pattern="yyyy-MM-dd"/>
-                    <p:message for="fechaCompra"/>
-
+                                <h:outputLabel for="observaciones" value="Observaciones"/>
+                                <p:inputTextarea id="observaciones" value="#{vehicleBean.vehicleSelected.vehicleComment}" rows="5"
+                                     cols="20"/>
+                                <h:outputLabel for="fechaCompra" value="Fecha de Compra"/>
+                                <p:calendar id="fechaCompra" value="#{vehicleBean.vehicleSelected.vehiclePurchasedDate}"
+                                    pattern="yyyy-MM-dd"/>
                     <f:facet name="footer">
                         <p:commandButton value="Agregar"
                                          actionListener="#{vehicleBean.registerVehicle()}"
                                          update="display,:vehiclesListForm:vehiclesDataTable"
-                                         oncomplete="PF('vehicleDialog').hide();"/>
+                                         oncomplete="PF('vehicleDialog').hide();"
+
+                        />
                     </f:facet>
                 </p:panelGrid>
             </p:outputPanel>
+
         </h:form>
     </p:dialog>
 
